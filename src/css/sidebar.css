@@ -1,15 +1,15 @@
-.sidebar{
-    background-color: pink;
-}
-.sidebar.visible {
-    background-color: #d32f2f;
-    transform: translateX(0);
+.sidebar {
+    width: 300px;
+    background-color: #f0f2f5;
+    border-left: 1px solid #ddd;
+    overflow-y: auto;
+    padding: 20px;
 }
 
 .sidebar h2 {
-    margin-top: 0;
-    font-size: 18px;
-    color: #333;
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: #050505;
 }
 
 .sidebar ul {
@@ -19,36 +19,49 @@
 }
 
 .sidebar li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 8px;
-    background-color: #f8f8f8;
+    margin-bottom: 12px;
+    padding: 12px;
+    background-color: white;
     border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar li p {
+    margin: 0 0 8px 0;
+    color: #050505;
+}
+
+.sidebar li small {
+    color: #65676B;
+    font-size: 12px;
+}
+
+.sidebar li .button-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.sidebar li button {
+    flex: 1;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.sidebar li:hover {
-    background-color: #ddd;
+.sidebar li button:first-child {
+    background-color: #e4e6eb;
+    color: #050505;
 }
 
-.sidebar li button {
-    background-color: #f44336;
+.sidebar li button:last-child {
+    background-color: #ff4444;
     color: white;
-    border: none;
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .sidebar li button:hover {
-    background-color: #d32f2f;
-}
-
-.sidebar small {
-    font-size: 12px;
-    color: #888;
+    filter: brightness(95%);
 }

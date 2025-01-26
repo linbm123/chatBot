@@ -7,7 +7,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ username }) => {
-   console.log("header");
+    console.log("header");
     return (
         <header>
             <h1>Chatbot {username}</h1>

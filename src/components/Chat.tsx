@@ -4,14 +4,16 @@ import Sidebar from "./Sidebar.tsx";
 import {useChatContext} from "../context/ChatContext.tsx";
 
 const Chat = () => {
-    const {  isSidebarVisible } = useChatContext();
+    const { isSidebarVisible } = useChatContext();
 
     return (
-        <>
-            <MessageList />
+        <div className="main-content">
+            <div className="chat-area">
+                <MessageList />
+                <Footer />
+            </div>
             {isSidebarVisible && <Sidebar />}
-            <Footer />
-        </>
+        </div>
     )
 }
 

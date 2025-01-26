@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
 import { v4 } from 'uuid';
 import { Message } from '../types';
 
@@ -11,6 +11,7 @@ interface ChatContextProps {
     resendMessage: (message: Message) => void;
     deleteMessage: (id: string) => void;
     isSidebarVisible: boolean;
+    handleSendMessage: (text: string) => void;
 }
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined);
@@ -32,12 +33,48 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
         setIsSidebarVisible((prev) => !prev);
     };
 
+    const handleSendMessage = useCallback((text: string) => {
+        setIsSending(true);
+
+        const newMessage = {
+            id: v4(),
+            text,
+            timestamp: new Date().toLocaleString(),
+            type: 'sent' as const,
+        };
+
+        // Add the new sent message
+        addMessage(newMessage);
+
+        // Simulate the bot response after a delay
+        setTimeout(() => {
+            const botResponse = {
+                id: v4(),
+                text: text,
+                timestamp: new Date().toLocaleString(),
+                type: 'received' as const,
+            };
+
+            // Add the received bot response
+            addMessage(botResponse);
+            setIsSending(false);
+        }, 1500);
+    }, []);
+
     const resendMessage = (message: Message) => {
-        addMessage({ ...message, id: v4(), timestamp: new Date().toISOString() });
+        handleSendMessage(message.text);
     };
 
     const deleteMessage = (id: string) => {
-        setMessages((prevMessages) => prevMessages.filter((msg) => msg.id !== id));
+        setMessages((prevMessages) => {
+            const messageIndex = prevMessages.findIndex(msg => msg.id === id);
+            if (messageIndex === -1) return prevMessages;
+
+            // Remove both the user message and the bot's response that follows it
+            const newMessages = [...prevMessages];
+            newMessages.splice(messageIndex, 2);
+            return newMessages;
+        });
     };
 
     return (
@@ -51,6 +88,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
                 resendMessage,
                 deleteMessage,
                 isSidebarVisible,
+                handleSendMessage,
             }}
         >
             {children}

@@ -9,17 +9,20 @@ const Sidebar: React.FC = () => {
 
     return (
         <div className="sidebar">
-            <h2>History Messages</h2>
+            <h2>Message History</h2>
             <ul>
-                {messages.map((msg) => {
-                    console.log("msgmsg", msg);
-                    return(
-                        msg.type=== 'sent' && <li key={msg.id}>
-                            <p>{msg.text} <small>{msg.timestamp}</small></p>
-                            <button onClick={() => resendMessage(msg)}>Resend</button>
-                            <button onClick={() => deleteMessage(msg.id)}>Delete</button>
+                {messages.map((msg) => (
+                    msg.type === 'sent' && (
+                        <li key={msg.id}>
+                            <p>{msg.text}</p>
+                            <small>{msg.timestamp}</small>
+                            <div className="button-group">
+                                <button onClick={() => resendMessage(msg)}>Resend</button>
+                                <button onClick={() => deleteMessage(msg.id)}>Delete</button>
+                            </div>
                         </li>
-                    )})}
+                    )
+                ))}
             </ul>
         </div>
     );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 import { useChatContext } from '../context/ChatContext';  // Access context
 
 import "../css/footer.css"
@@ -19,8 +19,16 @@ const Footer= ({  }) => {
     };
 
     const handleSend = () => {
-        handleSendMessage(message);
-        setMessage('');
+        if (message.trim()) {  // Only send if message is not empty or just whitespace
+            handleSendMessage(message);
+            setMessage('');
+        }
+    };
+
+    const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && message.trim()) {
+            handleSend();
+        }
     };
 
     return (
@@ -30,9 +38,13 @@ const Footer= ({  }) => {
                 type="text"
                 value={message}
                 onChange={handleChange}
+                onKeyPress={handleKeyPress}
                 placeholder="Type a message..."
             />
-            <button onClick={handleSend} disabled={isSending}>
+            <button
+                onClick={handleSend}
+                disabled={isSending || !message.trim()}  // Disable if sending or empty message
+            >
                 {isSending ? 'Sending...' : 'Send'}
             </button>
         </footer>
