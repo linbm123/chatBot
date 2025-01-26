@@ -1,0 +1,45 @@
+/* Footer styles */
+.footer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.footer input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.footer button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.footer button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.footer button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.footer .toggle-sidebar-btn {
+    background-color: #333;
+}
+
+.footer .toggle-sidebar-btn:hover {
+    background-color: #555;
+}
