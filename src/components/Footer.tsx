@@ -1,47 +1,44 @@
-import React, { useState, KeyboardEvent } from 'react';
-import { useChatContext } from '../context/ChatContext';  // Access context
+import React, { useState, useCallback, KeyboardEvent } from "react";
+import { useChatContext } from "../context/ChatContext";
 
 import "../css/footer.css"
-import {useSendMessage} from "../hooks/useSendMessage.ts";
 
-const Footer= ({  }) => {
-    const [message, setMessage] = useState<string>('');
-    const { isSending, toggleSidebar } = useChatContext();  // Get context values
+const Footer= () => {
+    const [message, setMessage] = useState("");
+    const { isSending, sendMessage, toggleSidebar } = useChatContext();
     console.log('footer');
-    const { handleSendMessage } = useSendMessage();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value);
-    };
+    }, []);
 
-    const handleSend = () => {
-        if (message.trim() && !isSending) {
-            handleSendMessage(message);
-            setMessage('');
-        }
-    };
+    const handleSend = useCallback(() => {
+        sendMessage(message);
+        setMessage("");
+    }, [message, sendMessage]);
 
     const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && message.trim()) {
-            handleSend();
+        if (e.key === 'Enter' && !isSending && message.trim()) {
+             handleSend();
         }
     };
+
+    const handleToggleSidebar = useCallback(() => {
+        toggleSidebar();
+    }, [toggleSidebar]);
 
     return (
         <footer>
-            <button onClick={toggleSidebar}>Toggle Sidebar</button>
+            <button onClick={handleToggleSidebar}>Toggle Sidebar</button>
             <input
                 type="text"
                 value={message}
                 onChange={handleChange}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 placeholder="Type a message..."
             />
-            <button
-                onClick={handleSend}
-                disabled={isSending || !message.trim()}  // Disable if sending or empty message
-            >
-                {isSending ? 'Sending...' : 'Send'}
+            <button onClick={handleSend} disabled={isSending || !message.trim()}>
+                {isSending ? "Sending..." : "Send"}
             </button>
         </footer>
     );

@@ -1,6 +1,6 @@
 export type MessageType = 'sent' | 'received';
 
-export interface Message {
+export type Message = {
     id: string;
     text: string;
     timestamp: string;
@@ -8,13 +8,13 @@ export interface Message {
     deleted?: boolean;
 }
 
-export interface ChatContextProps {
+export type ChatContextValue = {
     messages: Message[];
-    addMessage: (message: Message) => void;
     isSending: boolean;
-    setIsSending: (isSending: boolean) => void;
+    isSidebarVisible: boolean;
     toggleSidebar: () => void;
+    sendMessage: (text: string) => void;
+    addMessage: (message: Message) => void;
     resendMessage: (message: Message) => void;
     deleteMessage: (id: string) => void;
-    isSidebarVisible: boolean;
 }

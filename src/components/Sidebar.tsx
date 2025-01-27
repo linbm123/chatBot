@@ -4,8 +4,12 @@ import { useChatContext } from '../context/ChatContext';  // Access context
 import "../css/sidebar.css";
 
 const Sidebar: React.FC = () => {
-    const { messages, resendMessage, deleteMessage } = useChatContext();
+    const { isSidebarVisible, messages, resendMessage, deleteMessage } = useChatContext();
     console.log('Sidebar');
+
+    if (!isSidebarVisible) {
+        return null;
+    }
 
     return (
         <div className="sidebar">
