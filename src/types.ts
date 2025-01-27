@@ -5,6 +5,7 @@ export interface Message {
     text: string;
     timestamp: string;
     type: MessageType;
+    deleted?: boolean;
 }
 
 export interface ChatContextProps {

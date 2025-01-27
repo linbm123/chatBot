@@ -70,9 +70,12 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
             const messageIndex = prevMessages.findIndex(msg => msg.id === id);
             if (messageIndex === -1) return prevMessages;
 
-            // Remove both the user message and the bot's response that follows it
+            // Mark both the user message and the bot's response as deleted
             const newMessages = [...prevMessages];
-            newMessages.splice(messageIndex, 2);
+            newMessages[messageIndex] = { ...newMessages[messageIndex], deleted: true };
+            if (messageIndex + 1 < newMessages.length) {
+                newMessages[messageIndex + 1] = { ...newMessages[messageIndex + 1], deleted: true };
+            }
             return newMessages;
         });
     };

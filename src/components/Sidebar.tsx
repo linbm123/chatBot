@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
             <h2>Message History</h2>
             <ul>
                 {messages.map((msg) => (
-                    msg.type === 'sent' && (
+                    msg.type === 'sent' && !msg.deleted && (
                         <li key={msg.id}>
                             <p>{msg.text}</p>
                             <small>{msg.timestamp}</small>

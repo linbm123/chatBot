@@ -4,10 +4,6 @@ import { useChatContext } from '../context/ChatContext';  // Access context
 import "../css/footer.css"
 import {useSendMessage} from "../hooks/useSendMessage.ts";
 
-// interface FooterProps {
-//     onSendMessage: (message: string) => void;
-// }
-
 const Footer= ({  }) => {
     const [message, setMessage] = useState<string>('');
     const { isSending, toggleSidebar } = useChatContext();  // Get context values
@@ -19,7 +15,7 @@ const Footer= ({  }) => {
     };
 
     const handleSend = () => {
-        if (message.trim()) {  // Only send if message is not empty or just whitespace
+        if (message.trim() && !isSending) {
             handleSendMessage(message);
             setMessage('');
         }
