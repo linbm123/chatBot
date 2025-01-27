@@ -6,7 +6,6 @@ import "../css/footer.css"
 const Footer= () => {
     const [message, setMessage] = useState("");
     const { isSending, sendMessage, toggleSidebar } = useChatContext();
-    console.log('footer');
 
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value);

@@ -8,7 +8,6 @@ import "../css/massageList.css";
 const MessageList: React.FC = () => {
     const { messages } = useChatContext();
     const messageListRef = useRef<HTMLDivElement>(null);
-    console.log('MessageList');
 
     useScrollToBottom(messageListRef, [messages]);
 

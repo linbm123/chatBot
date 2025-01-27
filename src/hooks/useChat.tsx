@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {ChatContextValue, Message} from '../types';
+import {MESSAGE_TYPES} from "../constant.ts";
 
 export const useChat = (): ChatContextValue => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -23,7 +24,7 @@ export const useChat = (): ChatContextValue => {
         id: uuidv4(),
         text,
         timestamp: new Date().toLocaleString(),
-        type: "sent",
+        type: MESSAGE_TYPES.SENT,
       };
 
       addMessage(newMessage);
@@ -33,7 +34,7 @@ export const useChat = (): ChatContextValue => {
           id: uuidv4(),
           text: text,
           timestamp: new Date().toLocaleString(),
-          type: "received",
+          type: MESSAGE_TYPES.RECEIVED,
         };
 
         addMessage(botResponse);

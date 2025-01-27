@@ -6,13 +6,9 @@ interface HeaderProps {
     username: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ username }) => {
-    console.log("header");
-    return (
+const Header: React.FC<HeaderProps> = ({ username }) => (
         <header>
             <h1>Chatbot {username}</h1>
         </header>
-    );
-};
-
+);
 export default Header;
