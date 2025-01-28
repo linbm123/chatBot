@@ -1,42 +1,49 @@
-import React, { useState, useCallback, KeyboardEvent } from "react";
-import { useChatContext } from "../context/ChatContext";
+import React, {useState, KeyboardEvent, useCallback} from "react";
+import {useSidebarContext} from "../context/SidebarContext.tsx";
+import {useChatContext} from "../context/ChatContext.tsx";
 
-import "../css/footer.css"
+import "../css/footer.css";
 
-const Footer= () => {
+const Footer = () => {
     const [message, setMessage] = useState("");
-    const { isSending, sendMessage, toggleSidebar } = useChatContext();
+    const {toggleSidebar} = useSidebarContext();
+    const {sendMessage, isSending} = useChatContext();
 
-    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setMessage(e.target.value);
-    }, []);
+    const handleChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            setMessage(e.target.value);
+        }, []
+    );
 
     const handleSend = useCallback(() => {
         sendMessage(message);
         setMessage("");
     }, [message, sendMessage]);
 
-    const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && !isSending && message.trim()) {
-             handleSend();
+    const handleKeyPress = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter" && !isSending && message.trim()) {
+            handleSend();
         }
-    };
-
-    const handleToggleSidebar = useCallback(() => {
-        toggleSidebar();
-    }, [toggleSidebar]);
+    }, [isSending, message, handleSend])
 
     return (
         <footer>
-            <button onClick={handleToggleSidebar}>Toggle Sidebar</button>
+            <button onClick={toggleSidebar} aria-label="Toggle Sidebar">
+                Toggle Sidebar
+            </button>
             <input
                 type="text"
                 value={message}
                 onChange={handleChange}
                 onKeyDown={handleKeyPress}
                 placeholder="Type a message..."
+                aria-label="Message Input"
             />
-            <button onClick={handleSend} disabled={isSending || !message.trim()}>
+            <button
+                onClick={handleSend}
+                disabled={isSending || !message.trim()}
+                aria-label="Send Message"
+            >
                 {isSending ? "Sending..." : "Send"}
             </button>
         </footer>

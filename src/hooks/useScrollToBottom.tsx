@@ -1,14 +1,14 @@
-import { useEffect, RefObject } from "react";
+import {useEffect, RefObject} from "react";
 
-const useScrollToBottom = (
-  ref: RefObject<HTMLDivElement>,
-  dependencies: any[]
+const useScrollToBottom = <T, >(
+    ref: RefObject<HTMLDivElement>,
+    dependencies: T[]
 ) => {
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollTop = ref.current.scrollHeight;
-    }
-  }, dependencies);
+    useEffect(() => {
+        if (ref.current) {
+            ref.current.scrollTop = ref.current.scrollHeight;
+        }
+    }, dependencies);
 };
 
 export default useScrollToBottom;

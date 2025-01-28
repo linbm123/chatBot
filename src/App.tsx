@@ -1,12 +1,13 @@
 import {ChatProvider} from "./context/ChatContext.tsx";
 import Header from "./components/Header.tsx";
 import Chat from "./components/Chat.tsx";
+
 import "./App.css"
 
-const App: React.FC = () => {
+const App = () => {
     return (
         <div className="chat-container">
-            <Header username={'JohnDoe'} />
+            <Header username={'Lin :)'} />
             <ChatProvider>
                 <Chat />
             </ChatProvider>
@@ -14,3 +15,4 @@ const App: React.FC = () => {
     );
 };
 export default App
+

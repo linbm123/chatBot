@@ -11,8 +11,6 @@ export type Message = {
 export type ChatContextValue = {
     messages: Message[];
     isSending: boolean;
-    isSidebarVisible: boolean;
-    toggleSidebar: () => void;
     sendMessage: (text: string) => void;
     addMessage: (message: Message) => void;
     resendMessage: (message: Message) => void;

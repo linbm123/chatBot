@@ -1,16 +1,15 @@
-import React, { createContext, ReactNode, useContext } from "react";
-import { useChat } from "../hooks/useChat";
+import React, {createContext, ReactNode, useContext} from "react";
+import {useChat} from "../hooks/useChat";
 import {ChatContextValue} from "../types.ts";
 
 const ChatContext = createContext<ChatContextValue | undefined>(undefined);
 
-interface ChatProviderProps {
+type ChatProviderProps = {
     children: ReactNode;
 }
 
-export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
+export const ChatProvider: React.FC<ChatProviderProps> = ({children}) => {
     const chat = useChat();
-
     return <ChatContext.Provider value={chat}>{children}</ChatContext.Provider>;
 };
 
