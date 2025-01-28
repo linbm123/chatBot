@@ -26,7 +26,7 @@ A modern React-based chat application with real-time messaging capabilities, res
 ### Context
 
 - ChatContext.tsx: Manages global chat state and provides chat functionality to components
-- SidebarContext.tsx: Manages the visibility state of a sidebar component. This context provides a simple API for toggling sidebar visibility and accessing the current sidebar state throughout your application.
+- SidebarContext.tsx: Manages the visibility state of a sidebar component. This context provides a simple API for toggling sidebar visibility and accessing.
   
 
 ### Custom Hooks
