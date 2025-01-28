@@ -7,9 +7,9 @@ import "./App.css"
 const App = () => {
     return (
         <div className="chat-container">
-            <Header username={'Lin :)'} />
+            <Header username={'Lin :)'}/>
             <ChatProvider>
-                <Chat />
+                <Chat/>
             </ChatProvider>
         </div>
     );
